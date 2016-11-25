@@ -26,6 +26,52 @@
 	}
 	```
 	
-	It appears that as the UI is built, the `stop` button is added to `this.buttons`. The action which is performed is `game.stop()` on line 14. After observing coverage results, it seems that line 9 doesn't have full branch coverage. The prediction here is that only one state of `game` is tested. Also on like 14 where `game.stop()` is called, no coverage exists. The prediction here is that no test exists where `doAction` is called.
+	It appears that as the UI is built, the `stop` button is added to `this.buttons`. This functionality works but the test coverage is lacking. The action which is performed is `game.stop()` on line 14. After observing coverage results, it seems that line 9 doesn't have full branch coverage. The prediction here is that only one state of `game` is tested. Also on like 14 where `game.stop()` is called, no coverage exists. The prediction here is that no test exists where `doAction` is called.
 
-2. 
+2. A scenario tested was when the `stop` button was pressed, that no more moves could be made. 
+
+	This code is from `/jpacman-framework/src/main/java/nl/tudelft/jpacman/level/Level.java`.
+	
+	```java
+	/**
+	 * Moves the unit into the given direction if possible and handles all
+	 * collisions.
+	 * 
+	 * @param unit
+	 *            The unit to move.
+	 * @param direction
+	 *            The direction to move the unit in.
+	 */
+	public void move(Unit unit, Direction direction) {
+		assert unit != null;
+		assert direction != null;
+
+		if (!isInProgress()) {
+			return;
+		}
+
+		synchronized (moveLock) {
+			...
+		}
+	}
+	```
+	
+	While this functionality works the branch coverage is lacking. On line 14, only one value of the predicate `isInProgress()` is used thus not coverage every branch test scenario.
+
+3. A scenario tested was pressing the arrow keys to move pacman around the board.
+
+	This code is from `/jpacman-framework/src/main/java/nl/tudelft/jpacman/ui/PacKeyListener.java`.
+	
+	```java
+	@Override
+	public void keyPressed(KeyEvent e) {
+		assert e != null;
+		Action action = mappings.get(e.getKeyCode());
+		if (action != null) {
+			action.doAction();
+		}
+	}
+	```
+	
+	This is run everytime a key is pressed from the keyboard. It handles mapping a `KeyEvent` is a specific action, as this functionality works, the entire function does not have test coverage.
+	
