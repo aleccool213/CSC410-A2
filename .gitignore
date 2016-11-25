@@ -23,3 +23,7 @@ hs_err_pid*
 
 # Maven build files
 CSC410-A2.iml
+
+# report and build stuff
+# this folder should be generated on a per-build basis
+target
