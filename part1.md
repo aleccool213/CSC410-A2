@@ -86,3 +86,22 @@ Three application classes exist with 0% coverage.
 3. `/jpacman-framework/src/main/java/nl/tudelft/jpacman/PacmanConfigurationException.java`
 	* Simply no tests import `PacmanConfigurationException` so none of its functions are used in tests.
 
+### 3. Measure the code coverage again, but this time with a configuration that has runtime assertion enabled (add ‘ -ea ’ as VM argument). To do this, right click on the project, select “Coverage As”, then go to “Coverage Configurations”. Then under “Arguments” add “ -ea ” to VM arguments. Explain the coverage changes you see.
+
+* Without `-ea`
+
+	![](/Users/alecbrunelle/Downloads/csc419_without_ea.png)
+	
+* With `-ea`
+
+	![](/Users/alecbrunelle/Downloads/csc410_with_ea.png)	
+	
+Runtime assertions enable `assert` statements to be run. Some functions which act as invariants are held within `assert` statements thus causing less coverage to be obtained when running without `-ea`.
+
+An example is here in `/jpacman-framework/src/main/java/nl/tudelft/jpacman/board/Board.java`. This is the coverage when run without `-ea`.
+
+![](/Users/alecbrunelle/Downloads/csc410_with_ea_code.png)
+
+And this is the coverage when run with `-ea`.
+
+![](/Users/alecbrunelle/Downloads/csc410_code_with_ea.png)
