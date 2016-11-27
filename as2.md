@@ -105,3 +105,57 @@ An example is here in `/jpacman-framework/src/main/java/nl/tudelft/jpacman/board
 And this is the coverage when run with `-ea`.
 
 ![](/Users/alecbrunelle/Downloads/csc410_code_with_ea.png)
+
+
+As you can see the function inside the `assert invariant()` was run during the tests when Runtime Assertion was enabled. However all branch coverage does not exist still around the `assert` statements indicating a lack of test coverage still exists.
+
+
+## Part 2: Assess Quality of Tests using Mutation Testing
+
+### 1. Run PIT with the default set of mutation operators on the existing test suite and measure mutation coverage. Report the results and compare them with line coverage results you got earlier. Explain what you see.
+
+* Test coverage results:
+	![](/Users/alecbrunelle/Downloads/csc419_without_ea.png)
+
+* PIT coverage results:
+	![](/Users/alecbrunelle/Downloads/csc410_pit_coverage_results.png)
+	
+As you can see line coverage seems to be very similar but mutation coverage has a large margin in difference.
+
+Lets look at an example where there is a large difference in line coverage and mutatation coverage.
+
+As you can see in `/jpacman-framework/src/main/java/nl/tudelft/jpacman/Launcher.java`, 100% line coverage..
+
+![](/Users/alecbrunelle/Downloads/csc410_pit_comparison_1.png)
+
+But in the same file we have marginally less mutation coverage:
+
+![](/Users/alecbrunelle/Downloads/csc410_pit_comparison_2.png)
+
+Mutation testing will run tests with some tests removed to see if they still pass. The red highlights here indicate that PIT ran the test suite with line 199 removed and the tests still passed. This indicates a `survived` mutation which it will not count into mutation coverage.
+
+### 2. Run PIT with only “Conditionals Boundary Mutator”, “Increments Mutator”, and “Math Mutator”, respectively. Compare the results and explain.
+
+The mutators specified are a subset of the default mutators used thus less mutators are used when running the test suite. 
+
+One example here is shown.
+
+As you can see this is the summary of mutation coverage results for `nl.tudelft.jpacman.board`.
+
+![](/Users/alecbrunelle/Downloads/csc410_pit_mutations_config_2.png)
+
+This is the same summary but with the specified mutators.
+
+![](/Users/alecbrunelle/Downloads/csc410_pit_mutation_config.png)
+
+As you can see, less classes were covered with mutators. This is because the classes which were excluded do not contain code which can pertain to the specific mutators chosen.
+
+A more specific example is shown when looking at a class which did not get covered in our second PIT test coverage (the one with mutators specified).
+
+![](/Users/alecbrunelle/Downloads/csc410_pit_mutator_example_1.png)
+
+The rest of the file shows only green lines as well. This file was not covered in the test run where we specified mutators because the file does not contain lines with:
+
+* Conditional boundaries: `<, <=, >, >=`
+* Increments: `++, --`
+* Mathematical operators: `+, -, ...`

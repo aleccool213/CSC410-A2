@@ -132,6 +132,11 @@
             <targetTests>
                 <param>nl.tudelft.jpacman*</param>
             </targetTests>
+            <!-- <mutators>
+                <mutator>CONDITIONALS_BOUNDARY</mutator>
+                <mutator>INCREMENTS</mutator>
+                <mutator>MATH</mutator>
+            </mutators> -->
         </configuration>
       </plugin>
 
