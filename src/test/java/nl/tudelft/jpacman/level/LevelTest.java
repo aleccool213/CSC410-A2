@@ -6,8 +6,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 import nl.tudelft.jpacman.board.Board;
 import nl.tudelft.jpacman.board.Square;
+import nl.tudelft.jpacman.level.Level.LevelObserver;
 import nl.tudelft.jpacman.npc.NPC;
 
 import org.junit.Before;
@@ -53,6 +55,7 @@ public class LevelTest {
 	 * The collision map.
 	 */
 	private final CollisionMap collisions = mock(CollisionMap.class);
+	
 
 	/**
 	 * Sets up the level with the default board, a single NPC and a starting
@@ -154,5 +157,14 @@ public class LevelTest {
 		level.registerPlayer(p2);
 		level.registerPlayer(p3);
 		verify(p3).occupy(square1);
+	}
+	
+	/**
+	 * Verifies if no players are in the game, no one is alive.
+	 */
+	@Test
+	@SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
+	public void isAnyPlayerAlive() {
+		assertFalse(level.isAnyPlayerAlive());
 	}
 }

@@ -159,3 +159,58 @@ The rest of the file shows only green lines as well. This file was not covered i
 * Conditional boundaries: `<, <=, >, >=`
 * Increments: `++, --`
 * Mathematical operators: `+, -, ...`
+
+### 3. Add one Junit test case to an appropriate package (e.g., in “ src/test/java/... ”) so that with it more mutants can be killed using default PIT configurations (i.e., the mutation score increases). Include your test case in the report and explain.
+
+Found in `/jpacman-framework/src/main/java/nl/tudelft/jpacman/level/Level.java` starting on line 274.
+
+```java
+/**
+ * Returns <code>true</code> iff at least one of the players in this level
+ * is alive.
+ * 
+ * @return <code>true</code> if at least one of the registered players is
+ *         alive.
+ */
+public boolean isAnyPlayerAlive() {
+	for (Player p : players) {
+		if (p.isAlive()) {
+			return true;
+		}
+	}
+	return false;
+}
+```
+
+Before:
+
+![](/Users/alecbrunelle/Downloads/csc410_level_before.png)
+
+PIT reported this for the return line for `isAnyPlayerAlive`:
+
+`1.1 Location : isAnyPlayerAlive
+Killed by : none replaced return of integer sized value with (x == 0 ? 1 : 0) → SURVIVED`
+
+This simply means that PIT tried running the test suite with returning True instead of False and they all succeeded. This means that the return value is not being asserted anywhere in the test suite.
+
+After:
+
+![](/Users/alecbrunelle/Downloads/csc410_level_after.png)
+
+Test added:
+
+```java
+/**
+ * Verifies if no players are in the game, no one is alive.
+ */
+@Test
+@SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
+public void isAnyPlayerAlive() {
+	assertFalse(level.isAnyPlayerAlive());
+}
+```
+
+With this test, the return value of `isAnyPlayerAlive` is checked, thus the mutation mentioned previously will be killed.
+
+## Part 3: Extend Test Suite with Symbolic Execution
+
