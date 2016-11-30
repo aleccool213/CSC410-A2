@@ -1,11 +1,44 @@
 package nl.tudelft.jpacman.board;
 
+import static org.mockito.Mockito.mock;
+
 /**
  * A top-down view of a matrix of {@link Square}s.
  * 
  * @author Jeroen Roosen 
  */
 public class Board {
+
+	
+	static void main(String[] args){
+		Square x0y0 = new BasicSquare();
+		Square x0y1 = new BasicSquare();
+		Square x0y2 = new BasicSquare();
+		Square x1y0 = new BasicSquare();
+		Square x1y1 = new BasicSquare();
+		Square x1y2 = new BasicSquare();
+		Unit occupant = new BasicUnit();
+		x0y0.put(occupant);
+		Unit occupant1 = new BasicUnit();
+		x0y1.put(occupant1);
+		Unit occupant2 = new BasicUnit();
+		x0y2.put(occupant2);
+		Unit occupant3 = new BasicUnit();
+		x1y0.put(occupant3);
+		Unit occupant4 = new BasicUnit();
+		x1y1.put(occupant4);
+		Unit occupant5 = new BasicUnit();
+		x1y2.put(occupant5);
+		Square[][] grid = new Square[2][3];
+		grid[0][0] = x0y0;
+		grid[0][1] = x0y1;
+		grid[0][2] = x0y2;
+		grid[1][0] = x1y0;
+		grid[1][1] = x1y1;
+		grid[1][2] = x1y2;
+		Board board = new Board(grid);
+		board.withinBorders(1, 2);
+	}
 
 	/**
 	 * The grid of squares with board[x][y] being the square at column x, row y.
