@@ -6,4 +6,4 @@ listener = gov.nasa.jpf.symbc.SymbolicListener
 target=nl.tudelft.jpacman.board.Board
 classpath=./target/classes;./target/test-classes
 
-symbolic.method=nl.tudelft.jpacman.board.Board.withinBorders(sym#con)
+symbolic.method=nl.tudelft.jpacman.board.Board.withinBorders(sym#sym)

@@ -138,27 +138,39 @@ Mutation testing will run tests with some tests removed to see if they still pas
 
 The mutators specified are a subset of the default mutators used thus less mutators are used when running the test suite. 
 
-One example here is shown.
+Code which needs to appear for the mutator to be applied to the test related test suite.
 
-As you can see this is the summary of mutation coverage results for `nl.tudelft.jpacman.board`.
+* Increments: `++, --`
+* Mathematical operators: `+, -, ...`
+* Conditional boundaries: `<, <=, >, >=`
+
+As you can see this is the summary of mutation coverage results for `nl.tudelft.jpacman.board` using all mutators.
 
 ![](/Users/alecbrunelle/Downloads/csc410_pit_mutations_config_2.png)
 
-This is the same summary but with the specified mutators.
+#### Increments Mutator
 
-![](/Users/alecbrunelle/Downloads/csc410_pit_mutation_config.png)
+This is the same summary but with the `Increments Mutator`.
 
-As you can see, less classes were covered with mutators. This is because the classes which were excluded do not contain code which can pertain to the specific mutators chosen.
+![](/Users/alecbrunelle/Downloads/csc410_mutator_increments.png)
 
-A more specific example is shown when looking at a class which did not get covered in our second PIT test coverage (the one with mutators specified).
+As you can see here, the mutation coverage technically rises! The reason for this is that code which is excluded from the report (`Direction.java` for example) did not include increments. PIT was smart enough to not run those tests as mutations with this setting does not apply to it.
 
-![](/Users/alecbrunelle/Downloads/csc410_pit_mutator_example_1.png)
+#### Math Mutator
 
-The rest of the file shows only green lines as well. This file was not covered in the test run where we specified mutators because the file does not contain lines with:
+This is the same summary but with the `Math Mutator`.
 
-* Conditional boundaries: `<, <=, >, >=`
-* Increments: `++, --`
-* Mathematical operators: `+, -, ...`
+![](/Users/alecbrunelle/Downloads/csc410_mutator_math.png)
+
+As you can see here, the mutation coverage technically rises! The reason for this is that code which is excluded from the report (`Direction.java` for example) did not include addition, subtracting, modulus, etc. PIT was smart enough to not run those tests as mutations with this setting does not apply to it.
+
+#### Condition Boundaries
+
+This is the same summary but with the `Math Mutator`.
+
+![](/Users/alecbrunelle/Downloads/csc410_mutator_conditionals.png)
+
+As you can see here, the mutation coverage technically rises! The reason for this is that code which is excluded from the report (`Direction.java` for example) did not include conditional operators such as `>` and `<=`, etc. PIT was smart enough to not run those tests as mutations with this setting does not apply to it.
 
 ### 3. Add one Junit test case to an appropriate package (e.g., in “ src/test/java/... ”) so that with it more mutants can be killed using default PIT configurations (i.e., the mutation score increases). Include your test case in the report and explain.
 
