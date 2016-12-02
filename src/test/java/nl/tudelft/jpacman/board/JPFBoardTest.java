@@ -43,23 +43,72 @@ public class JPFBoardTest {
 	 */
 	@Test
 	public void verifyWithinBorders() {
-		assertTrue(board.withinBorders(0, 2));
+		assertTrue(board.withinBorders(0, 0));
 	}
 	
 	/**
-	 * Verifies that given a position on the board, returns False.
+	 * Verifies that given a position not on the board, returns False.
 	 */
 	@Test
 	public void verifyWithinBordersOutsideBounds() {
-		assertFalse(board.withinBorders(2, 2));
+		assertFalse(board.withinBorders(0, 3));
 	}
 	
 	/**
-	 * Verifies that given a position on the board, returns False.
+	 * Verifies that given a position not on the board, returns False.
 	 */
 	@Test
 	public void verifyWithinBordersOutsideBounds2() {
-		assertFalse(board.withinBorders(-1000000, 2));
+		assertFalse(board.withinBorders(0, -1000000));
 	}
+	
+	/**
+	 * Verifies that given a position not on the board, returns False.
+	 */
+	@Test
+	public void verifyWithinBordersOutsideBounds3() {
+		assertFalse(board.withinBorders(2, -2147483648));
+	}
+	
+	/**
+	 * Verifies that given a position not on the board, returns False.
+	 */
+	@Test
+	public void verifyWithinBordersOutsideBounds4() {
+		assertFalse(board.withinBorders(-1000000, -2147483648));
+	}
+	
+	/**
+	 * Verifies that given a position not on the board, returns False.
+	 */
+	@Test
+	public void verifyWithinBordersOffXUpperBound() {
+		assertFalse(board.withinBorders(3, 1));
+	}
+	
+	/**
+	 * Verifies that given a position not on the board, returns False.
+	 */
+	@Test
+	public void verifyWithinBordersOffXLowerBound() {
+		assertFalse(board.withinBorders(-1, 1));
+	}
+	
+	/**
+	 * Verifies that given a position not on the board, returns False.
+	 */
+	@Test
+	public void verifyWithinBordersOffYUpperBound() {
+		assertFalse(board.withinBorders(0, 4));
+	}
+	
+	/**
+	 * Verifies that given a position not on the board, returns False.
+	 */
+	@Test
+	public void verifyWithinBordersOffYLowerBound() {
+		assertFalse(board.withinBorders(0, -1));
+	}
+	
 
 }
