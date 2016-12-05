@@ -125,7 +125,7 @@ public class PacManUiBuilder {
 		buttons.put(FREEZE_CAPTION, new Action() {
 			@Override
 			public void doAction() {
-				game.start(); //NEEDS CHANGING TO FREEZE IMPLEMENTED IN Level.java
+				game.freeze();
 			}
 		});
 	}
