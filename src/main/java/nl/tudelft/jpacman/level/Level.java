@@ -79,6 +79,11 @@ public class Level {
 	private final Set<LevelObserver> observers;
 
 	/**
+     * <code>true</code> iff tis level is currently frozen, i.e NPCs cannot move.
+     */
+	private boolean frozen;
+
+	/**
 	 * Creates a new level for the board.
 	 * 
 	 * @param b
@@ -98,6 +103,7 @@ public class Level {
 
 		this.board = b;
 		this.inProgress = false;
+		this.frozen = false;
 		this.npcs = new HashMap<>();
 		for (NPC g : ghosts) {
 			npcs.put(g, null);
@@ -367,5 +373,23 @@ public class Level {
 		 * this event is received.
 		 */
 		void levelLost();
+	}
+
+
+	public void freeze(){
+		synchronized (startStopLock){
+			if (!isFrozen()){
+				stopNPCs();
+				isFrozen = true;
+			}
+			else{
+				startNPCs();
+				isFrozen = false;
+			}
+		}
+	}
+
+	public boolean isFrozen(){
+		return frozen;
 	}
 }
