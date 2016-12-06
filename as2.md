@@ -470,11 +470,20 @@ public void verifyWithinBordersOffYLowerBound() {
 
 A couple of strategies learned during lectures which can be used to make a good test suite:
 
+##### Black Box
+
+- Manual Testing
+	- All test scenarios logged
+
+##### White Box
+
 - Code Coverage (Jacoco)
 	- Line Coverage 	
 	- Branch Coverage
 - Mutation Coverage (PIT)
 - Symbolic Coverage (SPF)
+
+
 
 
 #### 2:
