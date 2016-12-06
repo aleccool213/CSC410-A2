@@ -49,9 +49,22 @@ public abstract class Game implements LevelObserver {
 	}
 
 	/**
-	 * Pauses the game.
+	 * Pauses the game. Player is also frozen.
 	 */
 	public void stop() {
+		synchronized (progressLock) {
+			if (!isInProgress()) {
+				return;
+			}
+			inProgress = false;
+			getLevel().stop();
+		}
+	}
+	
+	/**
+	 * Freezes the game. Player's action, pellets, score board, etc., are not be affected.
+	 */
+	public void freeze() {
 		synchronized (progressLock) {
 			if (!isInProgress()) {
 				return;

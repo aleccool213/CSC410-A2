@@ -79,7 +79,7 @@ public class Level {
 	private final Set<LevelObserver> observers;
 
 	/**
-     * <code>true</code> iff tis level is currently frozen, i.e NPCs cannot move.
+     * <code>true</code> iff this level is currently frozen, i.e NPCs cannot move.
      */
 	private boolean frozen;
 
@@ -233,6 +233,26 @@ public class Level {
 			inProgress = false;
 		}
 	}
+	
+	/**
+	 * Freezes this level, just stopping NPCs from moving but everything else is the same.
+	 */
+	public void freeze(){
+		if (isInProgress()){
+			if (!isFrozen()){
+				stopNPCs();
+				frozen = true;
+			}
+			else{
+				startNPCs();
+				frozen = false;
+			}
+		}
+		else{
+			return;
+		}
+	}
+
 
 	/**
 	 * Starts all NPC movement scheduling.
@@ -380,24 +400,6 @@ public class Level {
 		 */
 		void levelLost();
 	}
-
-
-	public void freeze(){
-		if (isInProgress()){
-			if (!isFrozen()){
-				stopNPCs();
-				frozen = true;
-			}
-			else{
-				startNPCs();
-				frozen = false;
-			}
-		}
-		else{
-			return;
-		}
-	}
-
 
 	public boolean isFrozen(){
 		return frozen;
