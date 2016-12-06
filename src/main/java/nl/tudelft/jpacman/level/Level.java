@@ -208,7 +208,7 @@ public class Level {
 			if (isInProgress()) {
 				return;
 			}
-			if (isFrozen()){
+			if (frozen){
 				return;
 			}
 			startNPCs();
@@ -226,7 +226,7 @@ public class Level {
 			if (!isInProgress()) {
 				return;
 			}
-			if (isFrozen()){
+			if (frozen){
 				return;
 			}
 			stopNPCs();
@@ -238,18 +238,16 @@ public class Level {
 	 * Freezes this level, just stopping NPCs from moving but everything else is the same.
 	 */
 	public void freeze(){
-		if (isInProgress()){
-			if (!isFrozen()){
-				stopNPCs();
-				frozen = true;
-			}
-			else{
-				startNPCs();
-				frozen = false;
-			}
-		}
-		else{
+		if (!isInProgress()) {
 			return;
+		}
+		if (!frozen){
+			stopNPCs();
+			frozen = true;
+		}
+		else {
+			startNPCs();
+			frozen = false;
 		}
 	}
 
@@ -399,9 +397,5 @@ public class Level {
 		 * this event is received.
 		 */
 		void levelLost();
-	}
-
-	public boolean isFrozen(){
-		return frozen;
 	}
 }

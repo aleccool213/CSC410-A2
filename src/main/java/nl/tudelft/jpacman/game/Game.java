@@ -69,8 +69,7 @@ public abstract class Game implements LevelObserver {
 			if (!isInProgress()) {
 				return;
 			}
-			inProgress = false;
-			getLevel().stop();
+			getLevel().freeze();
 		}
 	}
 
