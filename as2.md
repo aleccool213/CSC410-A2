@@ -493,8 +493,13 @@ We also wanted to make sure code coverage stayed the same/increase and did not d
 
 Code coverage report before implementation of feature:
 
+![](/Users/alecbrunelle/Downloads/csc410_with_ea.png)
 
 Code coverage report after implementation of feature:
+
+![](/Users/alecbrunelle/Downloads/csc410_code_coverage_after.png)
+
+As you can see it increases overall so we are confident in our test coverage.
 
 #### Mutation
 
@@ -586,4 +591,4 @@ the schedule.
 __Environmental needs:__
 
 Software Needs:
-Eclipse, Maven, JPF, PIT, Jacoco	
+Eclipse, Maven, JPF, PIT, Jacoco

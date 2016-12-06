@@ -2,7 +2,7 @@
 
 Assignment 2
 
-View the Assignment [write-up](as2.md)
+View the Assignment [write-up](as2.pdf)
 
 ![build status](https://travis-ci.org/SERG-Delft/jpacman-framework.svg?branch=master)
 
