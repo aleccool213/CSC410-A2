@@ -475,13 +475,7 @@ A couple of strategies learned during lectures which can be used to make a good 
 - Manual Testing
 	- All test scenarios logged
 
-##### White Box
-
-- Code Coverage (Jacoco)
-	- Line Coverage 	
-	- Branch Coverage
-- Mutation Coverage (PIT)
-- Symbolic Coverage (SPF)
+### White Box
 
 #### Code Coverage
 
@@ -495,11 +489,30 @@ Code coverage was done iteratively through the implementation of the feature. Af
   * The entire file is new
   * Tests were written only for code explicitly added to the class Game
 
-Mutation coverage was run after initial tests pertaining to code coverage were written.
+We also wanted to make sure code coverage stayed the same/increase and did not decrease.
+
+Code coverage report before implementation of feature:
 
 
+Code coverage report after implementation of feature:
 
+#### Mutation
 
+Mutation coverage was run after initial tests pertaining to code coverage were written. We analyzed the mutation coverage pertaining just to the code. For some reason PIT was timing out when trying to run the entire code base through PIT. These results are from specifying the classes individually in pom.xml.
+
+* PacManUIBuilder mutation results
+  * ![](/Users/alecbrunelle/Downloads/csc410_mutation_uibuilder.png)
+  * ![](/Users/alecbrunelle/Downloads/csc410_uibuilder_2.png)
+  * ![](/Users/alecbrunelle/Downloads/csc410_mutation_uibuilder_3.png)
+* Level mutation results
+  * ![](/Users/alecbrunelle/Downloads/csc410_mutation_level.png)
+  * ![](/Users/alecbrunelle/Downloads/csc410_mutation_level_2.png)
+* Game mutation results
+  * ![](/Users/alecbrunelle/Downloads/csc410_mutation_game.png)
+
+#### SPF and Symbolic Execution
+
+To make sure we covered cases we did not think of we thought about using SPF for class methods we wrote. After deeper analysis, we came to the conclusion that our methods are quite simple and do not involve ranges of any kind. All permutations are covered via unit tests already and no class methods accept integers or complex objects of any kind.
 
 
 #### 2:

@@ -1,4 +1,4 @@
-package nd.tudelft.jpacman.game;
+package nl.tudelft.jpacman.game;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 import nl.tudelft.jpacman.game.Game;
 import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.Player;
@@ -17,12 +16,11 @@ import nl.tudelft.jpacman.ui.PacManUiBuilder;
 
 import java.util.List;
 
-
 public class GameTest {
-	
+
 	private Level level = mock(Level.class);
-	
-	public class GameChild extends Game{
+
+	public class GameChild extends Game {
 
 		@Override
 		public List<Player> getPlayers() {
@@ -35,9 +33,9 @@ public class GameTest {
 			// TODO Auto-generated method stub
 			return level;
 		}
-		
+
 	}
-	
+
 	private GameChild newGame;
 
 	/*
@@ -48,16 +46,16 @@ public class GameTest {
 		// init new GameChild class
 		newGame = new GameChild();
 		GameChild spyClass = spy(newGame);
-		//mock functions to get game started
+		// mock functions to get game started
 		when(level.isAnyPlayerAlive()).thenReturn(true);
 		when(level.remainingPellets()).thenReturn(1);
 		// start the game
 		spyClass.start();
-		
+
 		spyClass.freeze();
 		verify(level, times(1)).freeze();
 	}
-	
+
 	/*
 	 * Validates that when freeze is called, this games level is frozen.
 	 */
@@ -66,9 +64,9 @@ public class GameTest {
 		// init new GameChild class
 		newGame = new GameChild();
 		GameChild spyClass = spy(newGame);
-		//mock functions to get game started
+		// mock functions to get game started
 		when(level.isAnyPlayerAlive()).thenReturn(true);
-		when(level.remainingPellets()).thenReturn(1);		
+		when(level.remainingPellets()).thenReturn(1);
 		spyClass.freeze();
 		verify(level, times(0)).freeze();
 	}
