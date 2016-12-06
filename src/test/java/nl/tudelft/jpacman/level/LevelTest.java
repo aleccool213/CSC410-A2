@@ -68,6 +68,57 @@ public class LevelTest {
 				square1, square2), collisions);
 		when(ghost.getInterval()).thenReturn(defaultInterval);
 	}
+	
+	/*
+	 * Validates frozen is false when class is constructed.
+	 */
+	@Test
+	public void testFrozenInit(){
+		assertFalse(level.getFrozen());
+	}
+	
+	/*
+	 * Validates freeze stops NPCs when called.
+	 */
+	@Test
+	public void testFreeze(){
+		// start the game
+		level.start();
+		
+		Level spyClass = spy(level);
+		
+		spyClass.freeze();
+		verify(spyClass, times(1)).stopNPCs();
+		assertTrue(spyClass.getFrozen());
+	}
+	
+	/*
+	 * Validates freeze does not stop NPCs when game is not in progress.
+	 */
+	@Test
+	public void testFreezeInProgress(){
+		Level spyClass = spy(level);
+		
+		spyClass.freeze();
+		verify(spyClass, times(0)).stopNPCs();
+	}
+	
+	/*
+	 * Validates freeze starts NPCs when already frozen.
+	 */
+	@Test
+	public void testFreezeAlreadyFrozen(){
+		// start the game
+		level.start();
+				
+		Level spyClass = spy(level);
+		
+		spyClass.freeze();
+		// call freeze again to unfreeze
+		spyClass.freeze();
+		verify(spyClass, times(1)).startNPCs();
+		assertFalse(spyClass.getFrozen());
+	}
 
 	/**
 	 * Validates the state of the level when it isn't started yet.

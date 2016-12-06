@@ -20,7 +20,7 @@ public abstract class Game implements LevelObserver {
 	private boolean inProgress;
 
 	/**
-	 * Object that locks the start and stop methods.
+	 * Object that locks the start, stop and freeze methods.
 	 */
 	private final Object progressLock = new Object();
 
