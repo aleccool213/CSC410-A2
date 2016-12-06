@@ -505,37 +505,72 @@ Mutation coverage was run after initial tests pertaining to code coverage were w
 #### 2:
 
 
-
 #### 3: What features have you tested? What approaches have you used to improve your tests? The marks will be given based on both your understanding as well as applications of different test strategies and the quality of your implementation and tests.
 
-A Standard Organization of an Analysis and Test Plan
-Analysis and test items:
+__Analysis and test items:__
+
 The items to be tested or analyzed. The description of each item indicates version and installation
 procedures that may be required.
-Features to be tested:
-The features considered in the plan.
-Features not to be tested:
-Features not considered in the current plan.
-Approach:
-The overall analysis and test approach, sufficiently detailed to permit identification of the major
-test and analysis tasks and estimation of time and resources.
-Pass/Fail criteria:
+
+
+__Features to be tested:__
+
+We are only testing one feature, it is the feature we added, The freeze (unfreeze button).
+
+
+__Features not to be tested:__
+
+The rest of the program has already been tested, so no new tested will be created for the rest of the program.
+
+__Approach:__
+
+Regression testing: Our first goal is to ensure that unchaged functionality remains that way. We re-run all the previous tests, from parts 1, 2 and 3 to ensure that the unchagned parts of the program remain the same.
+Once we are sure that the addition of the code for the new feature (freeze/unfreeze) has not introduced unexpected behavior elsewhere in the program we can continue to unit testing.
+
+Unit testing:
+
+Line/Branch Coverage:
+
+Symbolic Execution:
+
+Mutation testing:
+
+
+
+__Pass/Fail criteria:__
+
 Rules that determine the status of an artifact subjected to analysis and test.
-Suspension and resumption criteria:
+
+
+__Suspension and resumption criteria:__
+
 Conditions to trigger suspension of test and analysis activities (e.g., an excessive failure rate)
 and conditions for restarting or resuming an activity.
-Risks and contingencies:
+
+
+__Risks and contingencies:__
+
 Risks foreseen when designing the plan and a contingency plan for each of the identified
 risks.
-Deliverables:
+
+
+__Deliverables:__
+
 A list all A&T artifacts and documents that must be produced.
 Task and Schedule:
 A complete description of analysis and test tasks, relations among them, and relations between
 A&T and development tasks, with resource allocation and constraints. A task schedule
 usually includes GANTT and PERT diagrams.
-Staff and responsibilities:
+
+
+__Staff and responsibilities:__
+
 Staff required for performing analysis and test activities, the required skills, and the allocation
 of responsibilities among groups and individuals. Allocation of resources to tasks is described in
 the schedule.
-Environmental needs:
-Hardware and software required to perform analysis or testing activities.
+
+
+__Environmental needs:__
+
+Software Needs:
+Eclipse, Maven, JPF, PIT, Jacoco	
