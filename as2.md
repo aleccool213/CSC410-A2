@@ -463,4 +463,55 @@ public void verifyWithinBordersOffYLowerBound() {
 	assertFalse(board.withinBorders(0, -1));
 }
 ```
+
+### Part 4
+
+#### 1:
+
+A couple of strategies learned during lectures which can be used to make a good test suite:
+
+- Code Coverage (Jacoco)
+	- Line Coverage 	
+	- Branch Coverage
+- Mutation Coverage (PIT)
+- Symbolic Coverage (SPF)
+
+
+#### 2:
+
+
+
+#### 3: What features have you tested? What approaches have you used to improve your tests? The marks will be given based on both your understanding as well as applications of different test strategies and the quality of your implementation and tests.
+
+A Standard Organization of an Analysis and Test Plan
+Analysis and test items:
+The items to be tested or analyzed. The description of each item indicates version and installation
+procedures that may be required.
+Features to be tested:
+The features considered in the plan.
+Features not to be tested:
+Features not considered in the current plan.
+Approach:
+The overall analysis and test approach, sufficiently detailed to permit identification of the major
+test and analysis tasks and estimation of time and resources.
+Pass/Fail criteria:
+Rules that determine the status of an artifact subjected to analysis and test.
+Suspension and resumption criteria:
+Conditions to trigger suspension of test and analysis activities (e.g., an excessive failure rate)
+and conditions for restarting or resuming an activity.
+Risks and contingencies:
+Risks foreseen when designing the plan and a contingency plan for each of the identified
+risks.
+Deliverables:
+A list all A&T artifacts and documents that must be produced.
+Task and Schedule:
+A complete description of analysis and test tasks, relations among them, and relations between
+A&T and development tasks, with resource allocation and constraints. A task schedule
+usually includes GANTT and PERT diagrams.
+Staff and responsibilities:
+Staff required for performing analysis and test activities, the required skills, and the allocation
+of responsibilities among groups and individuals. Allocation of resources to tasks is described in
+the schedule.
+Environmental needs:
+Hardware and software required to perform analysis or testing activities.
 	
