@@ -166,7 +166,7 @@ public class PacManUiBuilder {
 	}
 
 	/**
-	 * Adds a start and stop button to the UI. The actual actions for these
+	 * Adds a start, stop and freeze button to the UI. The actual actions for these
 	 * buttons will be added upon building the UI.
 	 *
 	 * @return The builder.
@@ -175,6 +175,7 @@ public class PacManUiBuilder {
 		defaultButtons = true;
 		buttons.put(START_CAPTION, null);
 		buttons.put(STOP_CAPTION, null);
+		buttons.put(FREEZE_CAPTION, null);
 		return this;
 	}
 
@@ -191,5 +192,11 @@ public class PacManUiBuilder {
 		return this;
 	}
 
+	/*
+	 * Returns this class instances buttons.
+	 */
+	public Map<String, Action> getButtons(){
+		return buttons;
+	}
 
 }

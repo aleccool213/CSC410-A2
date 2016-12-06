@@ -6,6 +6,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -13,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import nl.tudelft.jpacman.board.Board;
 import nl.tudelft.jpacman.game.Game;
@@ -67,8 +70,18 @@ public class PacManUIBuilderTest {
 		
 		// build new PacManUiBuilderObject
 		pacManUiBuilder = new PacManUiBuilder();
+	}
+	
+	/*
+	 * Validates that when withDefaultButtons is called, freeze button is added.
+	 */
+	@Test
+	public void withDefaultButtons() {
 		pacManUiBuilder.withDefaultButtons();
 		
+		Map<String, Action> buttons = pacManUiBuilder.getButtons();
+		Action freezeButton = buttons.get("Freeze (Unfreeze)");
+		assertEquals(freezeButton, null);
 	}
 
 	/*
@@ -76,12 +89,28 @@ public class PacManUIBuilderTest {
 	 */
 	@Test
 	public void buildAddFreezeButton() {
-		PacManUiBuilder spyClass = spy(PacManUiBuilder.class);
-		
+		pacManUiBuilder.withDefaultButtons();
+
+		PacManUiBuilder spyClass = spy(pacManUiBuilder);
+				
 		// build the game
-		pacManUiBuilder.build(game);
+		spyClass.build(game);
 		
-		verify(spyClass).addFreezeButton(game);
+		verify(spyClass, times(1)).addFreezeButton(game);
+	}
+	
+	/*
+	 * Validates that build does not call addFreezeButton.
+	 * Should not do this when defaultButtons is false.
+	 */
+	@Test
+	public void buildAddFreezeButtonFalse() {
+		PacManUiBuilder spyClass = spy(pacManUiBuilder);
+				
+		// build the game
+		spyClass.build(game);
+		
+		verify(spyClass, never()).addFreezeButton(game);
 	}
 	
 	/*
@@ -93,15 +122,22 @@ public class PacManUIBuilderTest {
 		pacManUiBuilder.build(null);
 	}
 
-//  /*
-//	 * Validates that addFreezeButton() adds freeze button.
-//   *
-//   * Freeze button should call appropriate function.
-//	 */
-//	@Test
-//	public void addFreezeButtonTestFreeze() {
-//		fail("Not yet implemented");
-//	}
+	/*
+	 * Validates that addFreezeButton() adds freeze button.
+	 *
+   	 * Freeze button should call appropriate function.
+	 */
+	@Test
+	public void addFreezeButtonTestFreeze() {
+		pacManUiBuilder.withDefaultButtons();
+		pacManUiBuilder.addFreezeButton(game);
+		
+		Map<String, Action> buttons = pacManUiBuilder.getButtons();
+		Action freezeButton = buttons.get("Freeze (Unfreeze)");
+		freezeButton.doAction();
+		
+		verify(game, times(1)).freeze();
+	}
 
 
 

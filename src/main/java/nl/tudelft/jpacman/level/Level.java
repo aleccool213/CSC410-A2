@@ -208,9 +208,6 @@ public class Level {
 			if (isInProgress()) {
 				return;
 			}
-			if (frozen){
-				return;
-			}
 			startNPCs();
 			inProgress = true;
 			updateObservers();
@@ -226,9 +223,6 @@ public class Level {
 			if (!isInProgress()) {
 				return;
 			}
-			if (frozen){
-				return;
-			}
 			stopNPCs();
 			inProgress = false;
 		}
@@ -236,6 +230,8 @@ public class Level {
 	
 	/**
 	 * Freezes this level, just stopping NPCs from moving but everything else is the same.
+	 * 
+	 * If already frozen, unfreezes the NPCs.
 	 */
 	public void freeze(){
 		if (!isInProgress()) {
@@ -244,18 +240,18 @@ public class Level {
 		if (!frozen){
 			stopNPCs();
 			frozen = true;
+			return;
 		}
-		else {
-			startNPCs();
-			frozen = false;
-		}
+		startNPCs();
+		frozen = false;
 	}
 
 
 	/**
 	 * Starts all NPC movement scheduling.
 	 */
-	private void startNPCs() {
+	// TODO: change this to private and find a way to spy on this method
+	void startNPCs() {
 		for (final NPC npc : npcs.keySet()) {
 			ScheduledExecutorService service = Executors
 					.newSingleThreadScheduledExecutor();
@@ -269,7 +265,8 @@ public class Level {
 	 * Stops all NPC movement scheduling and interrupts any movements being
 	 * executed.
 	 */
-	private void stopNPCs() {
+	// TODO: change this to private and find a way to spy on this method
+	void stopNPCs() {
 		for (Entry<NPC, ScheduledExecutorService> e : npcs.entrySet()) {
 			e.getValue().shutdownNow();
 		}
@@ -337,6 +334,13 @@ public class Level {
 		assert pellets >= 0;
 		return pellets;
 	}
+	
+	/*
+	 * Returns this class instances frozen attr.
+	 */
+	public boolean getFrozen() {
+		return frozen;
+	}
 
 	/**
 	 * A task that moves an NPC and reschedules itself after it finished.
@@ -377,6 +381,7 @@ public class Level {
 			long interval = npc.getInterval();
 			service.schedule(this, interval, TimeUnit.MILLISECONDS);
 		}
+	
 	}
 
 	/**

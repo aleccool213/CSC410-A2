@@ -483,7 +483,9 @@ A couple of strategies learned during lectures which can be used to make a good 
 - Mutation Coverage (PIT)
 - Symbolic Coverage (SPF)
 
+#### Code Coverage
 
+Code coverage was done iteratvly through the 
 
 
 #### 2:
