@@ -9,8 +9,8 @@ import nl.tudelft.jpacman.ui.ScorePanel.ScoreFormatter;
 
 /**
  * Builder for the JPac-Man UI.
- * 
- * @author Jeroen Roosen 
+ *
+ * @author Jeroen Roosen
  */
 public class PacManUiBuilder {
 
@@ -23,6 +23,11 @@ public class PacManUiBuilder {
 	 * Caption for the default start button.
 	 */
 	private static final String START_CAPTION = "Start";
+
+    /**
+	 * Caption for the default freeze button.
+	 */
+	private static final String FREEZE_CAPTION = "Freeze (Unfreeze)";
 
 	/**
 	 * Map of buttons and their actions.
@@ -38,7 +43,7 @@ public class PacManUiBuilder {
 	 * <code>true</code> iff this UI has the default buttons.
 	 */
 	private boolean defaultButtons;
-	
+
 	/**
 	 * Way to format the score.
 	 */
@@ -55,7 +60,7 @@ public class PacManUiBuilder {
 
 	/**
 	 * Creates a new Pac-Man UI with the set keys and buttons.
-	 * 
+	 *
 	 * @param game
 	 *            The game to build the UI for.
 	 * @return A new Pac-Man UI with the set keys and buttons.
@@ -66,6 +71,7 @@ public class PacManUiBuilder {
 		if (defaultButtons) {
 			addStartButton(game);
 			addStopButton(game);
+			addFreezeButton(game);
 		}
 		return new PacManUI(game, buttons, keyMappings, scoreFormatter);
 	}
@@ -73,7 +79,7 @@ public class PacManUiBuilder {
 	/**
 	 * Adds a button with the caption {@value #STOP_CAPTION} that stops the
 	 * game.
-	 * 
+	 *
 	 * @param game
 	 *            The game to stop.
 	 */
@@ -91,7 +97,7 @@ public class PacManUiBuilder {
 	/**
 	 * Adds a button with the caption {@value #START_CAPTION} that starts the
 	 * game.
-	 * 
+	 *
 	 * @param game
 	 *            The game to start.
 	 */
@@ -107,8 +113,26 @@ public class PacManUiBuilder {
 	}
 
 	/**
+	 * Adds a button with the caption {@value #FREEZE_CAPTION} that FREEZES/UNFREEZES the
+	 * game.
+	 *
+	 * @param game
+	 *            The game to freeze/unfreeze.
+	 */
+	private void addFreezeButton(final Game game) {
+		assert game != null;
+
+		buttons.put(FREEZE_CAPTION, new Action() {
+			@Override
+			public void doAction() {
+				game.freeze();
+			}
+		});
+	}
+
+	/**
 	 * Adds a key listener to the UI.
-	 * 
+	 *
 	 * @param keyCode
 	 *            The key code of the key as used by {@link java.awt.event.KeyEvent}.
 	 * @param action
@@ -125,7 +149,7 @@ public class PacManUiBuilder {
 
 	/**
 	 * Adds a button to the UI.
-	 * 
+	 *
 	 * @param caption
 	 *            The caption of the button.
 	 * @param action
@@ -144,7 +168,7 @@ public class PacManUiBuilder {
 	/**
 	 * Adds a start and stop button to the UI. The actual actions for these
 	 * buttons will be added upon building the UI.
-	 * 
+	 *
 	 * @return The builder.
 	 */
 	public PacManUiBuilder withDefaultButtons() {
@@ -153,17 +177,19 @@ public class PacManUiBuilder {
 		buttons.put(STOP_CAPTION, null);
 		return this;
 	}
-	
+
 	/**
 	 * Provide formatter for the score.
-	 * 
+	 *
 	 * @param sf
 	 *         The score formatter to be used.
-	 * 
+	 *
 	 * @return The builder.
 	 */
 	public PacManUiBuilder withScoreFormatter(ScoreFormatter sf) {
 		scoreFormatter = sf;
 		return this;
 	}
+
+
 }

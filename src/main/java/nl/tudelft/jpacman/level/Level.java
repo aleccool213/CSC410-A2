@@ -20,8 +20,8 @@ import nl.tudelft.jpacman.npc.NPC;
 /**
  * A level of Pac-Man. A level consists of the board with the players and the
  * AIs on it.
- * 
- * @author Jeroen Roosen 
+ *
+ * @author Jeroen Roosen
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class Level {
@@ -79,8 +79,13 @@ public class Level {
 	private final Set<LevelObserver> observers;
 
 	/**
+     * <code>true</code> iff this level is currently frozen, i.e NPCs cannot move.
+     */
+	private boolean frozen;
+
+	/**
 	 * Creates a new level for the board.
-	 * 
+	 *
 	 * @param b
 	 *            The board for the level.
 	 * @param ghosts
@@ -98,6 +103,7 @@ public class Level {
 
 		this.board = b;
 		this.inProgress = false;
+		this.frozen = false;
 		this.npcs = new HashMap<>();
 		for (NPC g : ghosts) {
 			npcs.put(g, null);
@@ -111,7 +117,7 @@ public class Level {
 
 	/**
 	 * Adds an observer that will be notified when the level is won or lost.
-	 * 
+	 *
 	 * @param observer
 	 *            The observer that will be notified.
 	 */
@@ -121,7 +127,7 @@ public class Level {
 
 	/**
 	 * Removes an observer if it was listed.
-	 * 
+	 *
 	 * @param observer
 	 *            The observer to be removed.
 	 */
@@ -133,7 +139,7 @@ public class Level {
 	 * Registers a player on this level, assigning him to a starting position. A
 	 * player can only be registered once, registering a player again will have
 	 * no effect.
-	 * 
+	 *
 	 * @param p
 	 *            The player to register.
 	 */
@@ -153,7 +159,7 @@ public class Level {
 
 	/**
 	 * Returns the board of this level.
-	 * 
+	 *
 	 * @return The board of this level.
 	 */
 	public Board getBoard() {
@@ -163,7 +169,7 @@ public class Level {
 	/**
 	 * Moves the unit into the given direction if possible and handles all
 	 * collisions.
-	 * 
+	 *
 	 * @param unit
 	 *            The unit to move.
 	 * @param direction
@@ -202,6 +208,9 @@ public class Level {
 			if (isInProgress()) {
 				return;
 			}
+			if (frozen){
+				return;
+			}
 			startNPCs();
 			inProgress = true;
 			updateObservers();
@@ -217,10 +226,31 @@ public class Level {
 			if (!isInProgress()) {
 				return;
 			}
+			if (frozen){
+				return;
+			}
 			stopNPCs();
 			inProgress = false;
 		}
 	}
+	
+	/**
+	 * Freezes this level, just stopping NPCs from moving but everything else is the same.
+	 */
+	public void freeze(){
+		if (!isInProgress()) {
+			return;
+		}
+		if (!frozen){
+			stopNPCs();
+			frozen = true;
+		}
+		else {
+			startNPCs();
+			frozen = false;
+		}
+	}
+
 
 	/**
 	 * Starts all NPC movement scheduling.
@@ -248,7 +278,7 @@ public class Level {
 	/**
 	 * Returns whether this level is in progress, i.e. whether moves can be made
 	 * on the board.
-	 * 
+	 *
 	 * @return <code>true</code> iff this level is in progress.
 	 */
 	public boolean isInProgress() {
@@ -274,7 +304,7 @@ public class Level {
 	/**
 	 * Returns <code>true</code> iff at least one of the players in this level
 	 * is alive.
-	 * 
+	 *
 	 * @return <code>true</code> if at least one of the registered players is
 	 *         alive.
 	 */
@@ -289,7 +319,7 @@ public class Level {
 
 	/**
 	 * Counts the pellets remaining on the board.
-	 * 
+	 *
 	 * @return The amount of pellets remaining on the board.
 	 */
 	public int remainingPellets() {
@@ -310,8 +340,8 @@ public class Level {
 
 	/**
 	 * A task that moves an NPC and reschedules itself after it finished.
-	 * 
-	 * @author Jeroen Roosen 
+	 *
+	 * @author Jeroen Roosen
 	 */
 	private final class NpcMoveTask implements Runnable {
 
@@ -327,7 +357,7 @@ public class Level {
 
 		/**
 		 * Creates a new task.
-		 * 
+		 *
 		 * @param s
 		 *            The service that executes the task.
 		 * @param n
@@ -351,8 +381,8 @@ public class Level {
 
 	/**
 	 * An observer that will be notified when the level is won or lost.
-	 * 
-	 * @author Jeroen Roosen 
+	 *
+	 * @author Jeroen Roosen
 	 */
 	public interface LevelObserver {
 
