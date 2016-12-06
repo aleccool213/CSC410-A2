@@ -119,9 +119,9 @@ public class PacManUiBuilder {
 	 * @param game
 	 *            The game to freeze/unfreeze.
 	 */
-	private void addFreezeButton(final Game game) {
-		assert game != null;
-
+	// easier to test if public
+	// TODO: change to private and change tests
+	public void addFreezeButton(final Game game) {
 		buttons.put(FREEZE_CAPTION, new Action() {
 			@Override
 			public void doAction() {
