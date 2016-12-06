@@ -208,6 +208,9 @@ public class Level {
 			if (isInProgress()) {
 				return;
 			}
+			if (isFrozen()){
+				return;
+			}
 			startNPCs();
 			inProgress = true;
 			updateObservers();
@@ -221,6 +224,9 @@ public class Level {
 	public void stop() {
 		synchronized (startStopLock) {
 			if (!isInProgress()) {
+				return;
+			}
+			if (isFrozen()){
 				return;
 			}
 			stopNPCs();
@@ -377,17 +383,21 @@ public class Level {
 
 
 	public void freeze(){
-		synchronized (startStopLock){
+		if (isInProgress()){
 			if (!isFrozen()){
 				stopNPCs();
-				isFrozen = true;
+				frozen = true;
 			}
 			else{
 				startNPCs();
-				isFrozen = false;
+				frozen = false;
 			}
 		}
+		else{
+			return;
+		}
 	}
+
 
 	public boolean isFrozen(){
 		return frozen;
