@@ -2,6 +2,7 @@
 
 Assignment 2
 
+View the Assignment [write-up](as2.md)
 
 ![build status](https://travis-ci.org/SERG-Delft/jpacman-framework.svg?branch=master)
 
@@ -39,4 +40,3 @@ Getting Started
 3. To see JPacman in action: run `nl.tudelft.jpacman.Launcher`
 4. To run the test suite in maven: `mvn test`
 5. To run the test suite in Eclipse: right click -> run as -> JUnit Test.
-	 

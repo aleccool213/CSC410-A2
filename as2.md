@@ -5,18 +5,18 @@
 1. A scenario which was tested was starting the game with the `start` button and then stopping the game with the `stop` button. This appears to freeze the game in its current state.
 
 	This code is from: `/jpacman-framework/src/main/java/nl/tudelft/jpacman/ui/PacManUiBuilder.java`.
-	
+
 	```java
 	/**
 	 * Adds a button with the caption {@value #STOP_CAPTION} that stops the
 	 * game.
-	 * 
+	 *
 	 * @param game
 	 *            The game to stop.
 	 */
 	private void addStopButton(final Game game) {
 		assert game != null;
-	
+
 		buttons.put(STOP_CAPTION, new Action() {
 			@Override
 			public void doAction() {
@@ -25,18 +25,18 @@
 		});
 	}
 	```
-	
+
 	It appears that as the UI is built, the `stop` button is added to `this.buttons`. This functionality works but the test coverage is lacking. The action which is performed is `game.stop()` on line 14. After observing coverage results, it seems that line 9 doesn't have full branch coverage. The prediction here is that only one state of `game` is tested. Also on line 14 where `game.stop()` is called, no coverage exists. The prediction here is that no test exists where `doAction` is called.
 
-2. A scenario tested was when the `stop` button was pressed, that no more moves could be made. 
+2. A scenario tested was when the `stop` button was pressed, that no more moves could be made.
 
 	This code is from `/jpacman-framework/src/main/java/nl/tudelft/jpacman/level/Level.java`.
-	
+
 	```java
 	/**
 	 * Moves the unit into the given direction if possible and handles all
 	 * collisions.
-	 * 
+	 *
 	 * @param unit
 	 *            The unit to move.
 	 * @param direction
@@ -55,13 +55,13 @@
 		}
 	}
 	```
-	
+
 	While this functionality works the branch coverage is lacking. On line 14, only one value of the predicate `isInProgress()` is used thus not coverage every branch test scenario.
 
 3. A scenario tested was pressing the arrow keys to move pacman around the board.
 
 	This code is from `/jpacman-framework/src/main/java/nl/tudelft/jpacman/ui/PacKeyListener.java`.
-	
+
 	```java
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -72,14 +72,14 @@
 		}
 	}
 	```
-	
+
 	This is run everytime a key is pressed from the keyboard. It handles mapping a `KeyEvent` is a specific action, as this functionality works, the entire function does not have test coverage.
-	
+
 ### 2. Report the coverage percentage. Identify the three least covered application classes. Identify the three least covered application classes. Explain why the tests for them are adequate or how they can be improved.
 
 Three application classes exist with 0% coverage.
 
-1. `/jpacman-framework/src/main/java/nl/tudelft/jpacman/level/CollisionInteractionMap.java` 
+1. `/jpacman-framework/src/main/java/nl/tudelft/jpacman/level/CollisionInteractionMap.java`
 	* Simply no tests import `CollisionInteractionMap` so none of its functions are used in tests.
 2. `/jpacman-framework/src/main/java/nl/tudelft/jpacman/level/DefaultPlayerInteractionMap.java`
 	* Simply no tests import `DefaultPlayerInteractionMap` so none of its functions are used in tests.
@@ -91,11 +91,11 @@ Three application classes exist with 0% coverage.
 * Without `-ea`
 
 	![](/Users/alecbrunelle/Downloads/csc419_without_ea.png)
-	
+
 * With `-ea`
 
-	![](/Users/alecbrunelle/Downloads/csc410_with_ea.png)	
-	
+	![](/Users/alecbrunelle/Downloads/csc410_with_ea.png)
+
 Runtime assertions enable `assert` statements to be run. Some functions which act as invariants are held within `assert` statements thus causing less coverage to be obtained when running without `-ea`.
 
 An example is here in `/jpacman-framework/src/main/java/nl/tudelft/jpacman/board/Board.java`. This is the coverage when run without `-ea`.
@@ -119,7 +119,7 @@ As you can see the function inside the `assert invariant()` was run during the t
 
 * PIT coverage results:
 	![](/Users/alecbrunelle/Downloads/csc410_pit_coverage_results.png)
-	
+
 As you can see line coverage seems to be very similar but mutation coverage has a large margin in difference.
 
 Lets look at an example where there is a large difference in line coverage and mutatation coverage.
@@ -136,7 +136,7 @@ Mutation testing will run tests with some tests removed to see if they still pas
 
 ### 2. Run PIT with only “Conditionals Boundary Mutator”, “Increments Mutator”, and “Math Mutator”, respectively. Compare the results and explain.
 
-The mutators specified are a subset of the default mutators used thus less mutators are used when running the test suite. 
+The mutators specified are a subset of the default mutators used thus less mutators are used when running the test suite.
 
 Code which needs to appear for the mutator to be applied to the test related test suite.
 
@@ -180,7 +180,7 @@ Found in `/jpacman-framework/src/main/java/nl/tudelft/jpacman/level/Level.java` 
 /**
  * Returns <code>true</code> iff at least one of the players in this level
  * is alive.
- * 
+ *
  * @return <code>true</code> if at least one of the registered players is
  *         alive.
  */
@@ -266,7 +266,7 @@ static void main(String[] args){
 When running `java -jar /Users/alecbrunelle/Github/jpf-core/build/RunJPF.jar +shell.port=4242 /Users/alecbrunelle/School/CSC410-A2/q3part1.jpf `...
 
 ```
-Executing command: java -jar /Users/alecbrunelle/Github/jpf-core/build/RunJPF.jar +shell.port=4242 /Users/alecbrunelle/School/CSC410-A2/q3part1.jpf 
+Executing command: java -jar /Users/alecbrunelle/Github/jpf-core/build/RunJPF.jar +shell.port=4242 /Users/alecbrunelle/School/CSC410-A2/q3part1.jpf
 Running Symbolic PathFinder ...
 symbolic.dp=choco
 symbolic.string_dp_timeout_ms=0
@@ -341,17 +341,17 @@ import org.junit.Test;
  */
 public class JPFBoardTest {
 	private Board board;
-	
+
 	private final Square x0y0 = mock(Square.class);
 	private final Square x0y1 = mock(Square.class);
 	private final Square x0y2 = mock(Square.class);
 	private final Square x1y0 = mock(Square.class);
 	private final Square x1y1 = mock(Square.class);
 	private final Square x1y2 = mock(Square.class);
-	
+
 	private static final int MAX_WIDTH = 2;
 	private static final int MAX_HEIGHT = 3;
-	
+
 	/**
 	 * Setup a board that can be used for testing.
 	 */
@@ -366,7 +366,7 @@ public class JPFBoardTest {
 		grid[1][2] = x1y2;
 		board = new Board(grid);
 	}
-	
+
 	/**
 	 * Verifies that given a position on the board, returns True.
 	 */
@@ -374,7 +374,7 @@ public class JPFBoardTest {
 	public void verifyWithinBorders() {
 		assertTrue(board.withinBorders(0, 0));
 	}
-	
+
 	/**
 	 * Verifies that given a position not on the board, returns False.
 	 */
@@ -382,7 +382,7 @@ public class JPFBoardTest {
 	public void verifyWithinBordersOutsideBounds() {
 		assertFalse(board.withinBorders(0, 3));
 	}
-	
+
 	/**
 	 * Verifies that given a position not on the board, returns False.
 	 */
@@ -390,7 +390,7 @@ public class JPFBoardTest {
 	public void verifyWithinBordersOutsideBounds2() {
 		assertFalse(board.withinBorders(0, -1000000));
 	}
-	
+
 	/**
 	 * Verifies that given a position not on the board, returns False.
 	 */
@@ -398,7 +398,7 @@ public class JPFBoardTest {
 	public void verifyWithinBordersOutsideBounds3() {
 		assertFalse(board.withinBorders(2, -2147483648));
 	}
-	
+
 	/**
 	 * Verifies that given a position not on the board, returns False.
 	 */
@@ -438,7 +438,7 @@ Valid range for `y`: y >= 0, y < 3
 public void verifyWithinBordersOffXUpperBound() {
 	assertFalse(board.withinBorders(3, 1));
 }
-	
+
 /**
  * Verifies that given a position not on the board, returns False.
  */
@@ -446,7 +446,7 @@ public void verifyWithinBordersOffXUpperBound() {
 public void verifyWithinBordersOffXLowerBound() {
 	assertFalse(board.withinBorders(-1, 1));
 }
-	
+
 /**
  * Verifies that given a position not on the board, returns False.
  */
@@ -454,7 +454,7 @@ public void verifyWithinBordersOffXLowerBound() {
 public void verifyWithinBordersOffYUpperBound() {
 	assertFalse(board.withinBorders(0, 4));
 }
-	
+
 /**
  * Verifies that given a position not on the board, returns False.
  */
@@ -485,7 +485,21 @@ A couple of strategies learned during lectures which can be used to make a good 
 
 #### Code Coverage
 
-Code coverage was done iteratvly through the 
+Code coverage was done iteratively through the implementation of the feature. After each test was written, tests were made to attain full line and branch coverage. For reference, these tests can be found in:
+* `/src/test/java/nl/tudelft/jpacman/ui/PacManUIBuilderTest.java`
+  * The entire file is new
+  * Tests were written only for code explicitly added to the class PacManUIBuilder
+* `/src/test/java/nl/tudelft/jpacman/level/LevelTest.java`
+  * Starting at line 70
+* `/src/test/java/nd/tudelft/jpacman/game/GameTest.java`
+  * The entire file is new
+  * Tests were written only for code explicitly added to the class Game
+
+Mutation coverage was run after initial tests pertaining to code coverage were written.
+
+
+
+
 
 
 #### 2:
@@ -525,4 +539,3 @@ of responsibilities among groups and individuals. Allocation of resources to tas
 the schedule.
 Environmental needs:
 Hardware and software required to perform analysis or testing activities.
-	
