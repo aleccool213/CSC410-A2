@@ -473,7 +473,12 @@ A couple of strategies learned during lectures which can be used to make a good 
 ##### Black Box
 
 - Manual Testing
-	- All test scenarios logged
+	- After implementing the Freeze (Unfreeze) button, we launched the game.
+	 	- We saw that the button appeared, we can conclude that the code added to PacManUIBuilder displayed the desire bdehavior.
+		- Pressing start, the game began, after a few moves, we clicked on the freeze button, and saw that the NPCs did in fact freeze, while everything else remained the same, once again displaying desired behavior.
+		- Pressing Freeze again, the NPC's unfroze. This again was an exhibition of desired behavior.
+		- We started a new game and pressed start, and after a few moves pressed freeze, we then pressed start to see if the NPCs would start again, but they did not, this was the desired behavior.
+		- We started a new game and then pressed start, then freeze, then stop, then start again to see if during a freeze, we could start/stop the game. It was in fact possible, this was not desired behavior, so we had to modify the function.
 
 ### White Box
 
@@ -521,14 +526,10 @@ To make sure we covered cases we did not think of we thought about using SPF for
 
 
 #### 2:
-
+As mentioned in 4.1, When manual testing the prototype, we unconvered unexpected behavior with the use of start and stop while the game was frozen, this was considered a bug, and we rectified adding a check to see if the game was frozen before start or stop are called, and if they were, start and stop return before doing anything. This was the only bug we came accross through our tests.
+Because the function we added was quite simple, unit tests, mutation tests and code coverage all returned expected results.
 
 #### 3: What features have you tested? What approaches have you used to improve your tests? The marks will be given based on both your understanding as well as applications of different test strategies and the quality of your implementation and tests.
-
-__Analysis and test items:__
-
-The items to be tested or analyzed. The description of each item indicates version and installation
-procedures that may be required.
 
 
 __Features to be tested:__
@@ -542,50 +543,43 @@ The rest of the program has already been tested, so no new tested will be create
 
 __Approach:__
 
-Regression testing: Our first goal is to ensure that unchaged functionality remains that way. We re-run all the previous tests, from parts 1, 2 and 3 to ensure that the unchagned parts of the program remain the same.
-Once we are sure that the addition of the code for the new feature (freeze/unfreeze) has not introduced unexpected behavior elsewhere in the program we can continue to unit testing.
+Regression testing: Our first goal was to ensure that unchaged functionality remained that way. We re-ran all the previous tests, from parts 1, 2 and 3 to ensure that the unchagned parts of the program remained the same.
+Once we were sure that the addition of the code for the new feature (freeze/unfreeze) did not introduce any unexpected behavior elsewhere in the program we continued to unit testing.
 
-Unit testing:
+Unit testing: We decided to create ensure that the methods that make up the program eaach behave as expected, in accordance to a specification. Having made small modifications to Start and Stop we added additional tests to ensure these updated functions maintained their desired behavior.
 
-Line/Branch Coverage:
+Line/Branch Coverage: The purpose for testing Line and Branch coverage was that we wanted to make sure our tests cases executed the methods completely, and that no line of code, or branch was left unexecuted by our tests, as this increases the likelyhood of undiscovered bugs, it also implies our tests are inadequate
 
-Symbolic Execution:
-
-Mutation testing:
+Mutation testing: We decided to employ mutation testing techniques to further verify the adequacy of our tests.
 
 
 
 __Pass/Fail criteria:__
 
-Rules that determine the status of an artifact subjected to analysis and test.
+If the previous tests pass after the implementation of the new feature, we know that the new feature has not created bugs in other parts of the codebase. This is considered a pass.
 
+Following regression testing, if our unit tests return expected results, we could consider this a pass.
 
-__Suspension and resumption criteria:__
+Line and Branch coverage were employed to verify adequacy of our tests, to ensure there weren't any lines of code, or branches of execution that were missed by our test suites. If we achieve 100% line and branch coverage, this is considered a pass.
 
-Conditions to trigger suspension of test and analysis activities (e.g., an excessive failure rate)
-and conditions for restarting or resuming an activity.
+Mutation Testing was also employed as checking that executing all the code is not enough.
+
 
 
 __Risks and contingencies:__
 
-Risks foreseen when designing the plan and a contingency plan for each of the identified
-risks.
-
+When adding a new feature to an existing code base, care must be taken to ensure that previously tested parts of the codebase continue to behave in accordance with the specification, and continue to pass the tests created for them.
+When adding the Freeze/Unfreeze button, we needed to ensure that the functionality of Start and Stop did not interfere with Freeze/Unfreeze, and that Freeze/Unfreeze did not interfere with start and stop.
+Initially, modifications were made to start and stop to check the state of the game, to verify whether it was frozen or not.
 
 __Deliverables:__
 
-A list all A&T artifacts and documents that must be produced.
-Task and Schedule:
-A complete description of analysis and test tasks, relations among them, and relations between
-A&T and development tasks, with resource allocation and constraints. A task schedule
-usually includes GANTT and PERT diagrams.
-
+Refer to 4.1 for delieverables.
 
 __Staff and responsibilities:__
 
-Staff required for performing analysis and test activities, the required skills, and the allocation
-of responsibilities among groups and individuals. Allocation of resources to tasks is described in
-the schedule.
+The team consisted of Alec Brunelle and Mohammad Durrani, the required skills were familiarity
+with Java, Eclipse, Maven, PIT, SPF and Jacoco. We tackled each phase of testing together, the responsibilities were not divided, as we saw it best to have two pairs of eyes, and a diverse set of ideas at each stage in the testing process.
 
 
 __Environmental needs:__
