@@ -526,29 +526,30 @@ To make sure we covered cases we did not think of we thought about using SPF for
 
 
 #### 2:
-As mentioned in 4.1, When manual testing the prototype, we unconvered unexpected behavior with the use of start and stop while the game was frozen, this was considered a bug, and we rectified adding a check to see if the game was frozen before start or stop are called, and if they were, start and stop return before doing anything. This was the only bug we came accross through our tests.
-Because the function we added was quite simple, unit tests, mutation tests and code coverage all returned expected results.
+As mentioned in 4.1, When manual testing the prototype, we unconvered unexpected behavior with the use of start and stop while the game was frozen, this was considered a bug, and we fixed the bug by adding a check to see if the game was frozen. This was the only bug we came accross through our tests.
+
+The feature we added was quite simple, unit tests, mutation tests and code coverage all returned expected results.
 
 #### 3: What features have you tested? What approaches have you used to improve your tests? The marks will be given based on both your understanding as well as applications of different test strategies and the quality of your implementation and tests.
 
 
 __Features to be tested:__
 
-We are only testing one feature, it is the feature we added, The freeze (unfreeze button).
+We are only testing one feature, it is the feature we added, the freeze (unfreeze button).
 
 
 __Features not to be tested:__
 
-The rest of the program has already been tested, so no new tested will be created for the rest of the program.
+The rest of the program has already been tested, so no new tests will be created for the rest of the program.
 
 __Approach:__
 
-Regression testing: Our first goal was to ensure that unchaged functionality remained that way. We re-ran all the previous tests, from parts 1, 2 and 3 to ensure that the unchagned parts of the program remained the same.
+Regression testing: Our first goal was to ensure that unchanged functionality remained the same as it was before. We re-ran all the previous tests, from parts 1, 2 and 3 to ensure that the unchagned parts of the program remained the same.
 Once we were sure that the addition of the code for the new feature (freeze/unfreeze) did not introduce any unexpected behavior elsewhere in the program we continued to unit testing.
 
-Unit testing: We decided to create ensure that the methods that make up the program eaach behave as expected, in accordance to a specification. Having made small modifications to Start and Stop we added additional tests to ensure these updated functions maintained their desired behavior.
+Unit testing: We decided to ensure that the methods that make up the program each behaved as expected, in accordance to a specification. Having made small modifications to `start` and `stops we added additional tests to ensure these updated functions maintained their desired behavior.
 
-Line/Branch Coverage: The purpose for testing Line and Branch coverage was that we wanted to make sure our tests cases executed the methods completely, and that no line of code, or branch was left unexecuted by our tests, as this increases the likelyhood of undiscovered bugs, it also implies our tests are inadequate
+Line/Branch Coverage: The purpose for testing line and branch coverage was that we wanted to make sure our tests cases executed the methods completely, and that no line of code, or branch was left unexecuted by our tests, as this increases the likelyhood of undiscovered bugs, it also implies our tests are inadequate.
 
 Mutation testing: We decided to employ mutation testing techniques to further verify the adequacy of our tests.
 
@@ -562,7 +563,7 @@ Following regression testing, if our unit tests return expected results, we coul
 
 Line and Branch coverage were employed to verify adequacy of our tests, to ensure there weren't any lines of code, or branches of execution that were missed by our test suites. If we achieve 100% line and branch coverage, this is considered a pass.
 
-Mutation Testing was also employed as checking that executing all the code is not enough.
+Mutation Testing was also employed to ensure everything was tested correctly. If we achieved 100% mutation coverage on the new lines we implemented, this would be considered a pass.
 
 
 
