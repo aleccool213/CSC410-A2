@@ -33,10 +33,12 @@ public abstract class Game implements LevelObserver {
 
 	/**
 	 * Starts or resumes the game.
+	 * 
+	 * Returns early if game is frozen.
 	 */
 	public void start() {
 		synchronized (progressLock) {
-			if (isInProgress()) {
+			if (isInProgress() || getLevel().getFrozen()) {
 				return;
 			}
 			if (getLevel().isAnyPlayerAlive()
@@ -50,10 +52,12 @@ public abstract class Game implements LevelObserver {
 
 	/**
 	 * Pauses the game. Player is also frozen.
+	 * 
+	 * Returns early if game is frozen.
 	 */
 	public void stop() {
 		synchronized (progressLock) {
-			if (!isInProgress()) {
+			if (!isInProgress() || getLevel().getFrozen()) {
 				return;
 			}
 			inProgress = false;
